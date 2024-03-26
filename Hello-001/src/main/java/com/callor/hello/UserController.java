@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.callor.hello.models.UserDto;
+
 /**
  * Spring routing Spring 에서는 Routing을 Controller라고 한다. Spring class에 @Controller
  * 를 부착하면 이 클래스가 Routing 을 수행하게 된다. Class의 method 들이 각각의 Routing 이 되어 응답을 처리한다.
@@ -38,9 +40,21 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value="/join", method=RequestMethod.GET)
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join() {
 		return null;
 	}
-}
 
+//	@RequestMapping(value = "/join", method = RequestMethod.POST)
+//	public String join(String username, String password, String name, String email, String tel) {
+//		return null;
+//	}
+
+	
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(UserDto userDto, Model model) {
+		model.addAttribute("USER",userDto);
+		return null;
+	}
+
+}
