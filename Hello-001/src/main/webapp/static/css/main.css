@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+header.main {
+  padding: 1.2rem;
+  text-align: center;
+  color: white;
+  background-color: greenyellow;
+  text-shadow: 1px 1px 1px black;
+}
