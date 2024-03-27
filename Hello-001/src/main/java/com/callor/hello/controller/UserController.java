@@ -1,4 +1,4 @@
-package com.callor.hello;
+package com.callor.hello.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.callor.hello.models.UserDto;
+import com.callor.hello.service.UserService;
+import com.callor.hello.service.impl.UserServiceImpl;
 
 /**
  * Spring routing Spring 에서는 Routing을 Controller라고 한다. Spring class에 @Controller
@@ -26,6 +28,18 @@ import com.callor.hello.models.UserDto;
 @RequestMapping(value = "/user")
 
 public class UserController {
+
+	private final UserService userService;
+
+	public UserController(UserService userService) {
+		//생성
+		
+//		userService = new UserServiceImpl();
+		
+		//사용
+		this.userService = userService;
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 
@@ -41,7 +55,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join() {
+	public String join(Model model) {
+
+//		UserService userService = new UserServiceImpl();
+		UserDto user = userService.getUser();
+		model.addAttribute("USER", user);
 		return null;
 	}
 
@@ -50,10 +68,9 @@ public class UserController {
 //		return null;
 //	}
 
-	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserDto userDto, Model model) {
-		model.addAttribute("USER",userDto);
+		model.addAttribute("USER", userDto);
 		return null;
 	}
 
