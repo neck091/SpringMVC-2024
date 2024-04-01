@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.callor.iolist.persistance.IoDao">
+
+
+	<insert id="insert" parameterType="IoVO">
+		INSERT INTO tbl_iolist (
+		io_date ,
+		io_time,
+		io_pname ,
+		io_input,
+		io_price,
+		io_quan,
+		io_total)
+		VALUES(#{io_date},#{io_time},#{io_pname},#{io_input},#{io_price},#{io_quan},#{io_total})
+	</insert>
+
+	<update id="update">
+		UPDATE tbl_iolist
+		SET io_date= #{io_date}, io_time= #{io_time}, io_pname= #{io_pname}, 
+		io_input= #{io_input}, io_quan= #{io_quan}, io_total= #{io_total}
+		WHERE id = #{id}
+	</update>
+
+</mapper> 
