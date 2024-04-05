@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+form.user.login {
+  width: 50%;
+  margin: 10px auto;
+  legend {
+    text-align: center;
+    padding: 8px;
+  }
+  fieldset {
+    border-radius: 20px;
+  }
+
+  div {
+    width: 80%;
+    margin: 5px auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    input {
+      width: 60%;
+      /* display: inline-block; */
+      border: 1px solid #777;
+      /* margin: 0 auto; */
+      border-radius: 10px;
+      outline: none;
+      padding: 8px;
+      transition: 0.8s;
+      &:not([type="submit"]):focus {
+        width: 80%;
+      }
+    }
+  }
+}
+
+form.user.login {
+  a {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #777;
+    &:hover {
+      color: blue;
+    }
+  }
+}
+
+div.error {
+  background-color: red;
+  color: yellow;
+  font-weight: 900;
+  border-radius: 20px;
+}

@@ -40,4 +40,5 @@ section.container {
   height: calc(100%);
   margin: 3px;
   border: 2px solid blue;
+  overflow-y: auto;
 }

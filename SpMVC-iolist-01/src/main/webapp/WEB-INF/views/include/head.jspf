@@ -30,8 +30,8 @@ text-decoration: none;
 color:inherit
 }
 </style>
-<link rel="stylesheet" href="${rootPath}/static/css/main.css?21813" />
-<link rel="stylesheet" href="${rootPath}/static/css/iolist.css?218" />
+<link rel="stylesheet" href="${rootPath}/static/css/main.css?28139" />
+<link rel="stylesheet" href="${rootPath}/static/css/iolist.css?2877" />
 <link rel="stylesheet" href="${rootPath}/static/css/login.css?88978" />
 <script>
 	//간단한 연산식을 표현하는 방법

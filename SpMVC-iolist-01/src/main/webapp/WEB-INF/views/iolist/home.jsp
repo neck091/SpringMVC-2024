@@ -3,7 +3,17 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<div class="iolist btn_box">
+	<form:form method="GET" modelAttribute="SEARCH">
+		<form:input placeholder="상품명" path="pname" />
+		<form:input placeholder="시작일자" path="sdate" />
+		<form:input placeholder="종료일자" path="edate" />
+		<input type="submit" value="검색" />
+	</form:form>
+	<a href="${rootPath}/iolist/insert">추가</a>
+</div>
 <table class="iolist list">
 
 	<thead>
@@ -23,13 +33,12 @@
 	<tbody>
 		<c:forEach items="${IOLIST}" var="IO" varStatus="INDEX">
 			<tr data-seq="${IO.io_seq}"
-			class=""
-			>
+				class="${IO.io_input eq '1' ? 'output' : 'input' }">
 				<td>${INDEX.count}</td>
 				<td>${IO.io_date}</td>
 				<td>${IO.io_time}</td>
 				<td>${IO.io_inout}</td>
-				<td>${IO.io_pname}</td>
+				<td class="iolist pname">${IO.io_pname}</td>
 
 
 				<td class="number"><fmt:formatNumber value="${IO.io_iprice}"
@@ -48,7 +57,3 @@
 		</c:forEach>
 	</tbody>
 </table>
-
-<div class="iolist btn_box">
-	<a href="${rootPath}/iolist/insert">추가</a>
-</div>

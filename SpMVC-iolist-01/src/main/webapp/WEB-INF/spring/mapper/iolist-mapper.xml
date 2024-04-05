@@ -9,44 +9,72 @@
 		SELECT *,
 		IF(io_input = '1', '매입', '매출') AS io_inout,
 		IF(io_input = '1', io_price, 0) AS io_iprice,
-		IF(io_input = '2', io_price, 0) AS io_oprice,
-		IF(io_input = '1', io_price * io_quan, 0) AS io_itotal,
+		IF(io_input = '2',
+		io_price, 0) AS io_oprice,
+		IF(io_input = '1', io_price * io_quan, 0) AS
+		io_itotal,
 		IF(io_input = '2', io_price * io_quan, 0) AS io_ototal
 		FROM
 		tbl_iolist
-		ORDER BY io_date DESC, io_time DESC;
+		ORDER BY io_date DESC, io_time DESC
 	</select>
 
 	<select id="findBySeq">
 		SELECT *,
 		IF(io_input = '1', '매입', '매출') AS io_inout,
 		IF(io_input = '1', io_price, 0) AS io_iprice,
-		IF(io_input = '2', io_price, 0) AS io_oprice,
-		IF(io_input = '1', io_price * io_quan, 0) AS io_itotal,
+		IF(io_input = '2',
+		io_price, 0) AS io_oprice,
+		IF(io_input = '1', io_price * io_quan, 0) AS
+		io_itotal,
 		IF(io_input = '2', io_price * io_quan, 0) AS io_ototal
-		FROM tbl_iolist
+		FROM
+		tbl_iolist
 		WHERE io_seq = #{io_seq}
 	</select>
 
 
+	<select id="selectSearchAll">
+
+		SELECT *,
+		IF(io_input = '1', '매입', '매출') AS io_inout,
+		IF(io_input = '1',
+		io_price, 0) AS io_iprice,
+		IF(io_input = '2', io_price, 0) AS
+		io_oprice,
+		IF(io_input = '1', io_price * io_quan, 0) AS io_itotal,
+		IF(io_input = '2', io_price * io_quan, 0) AS io_ototal
+		FROM
+		tbl_iolist
+		<where>
+			<if test="pname != null and pname != '' "> AND io_pname LIKE CONCAT( '%', #{pname} ,'%')</if>
+			<if test="sdate != null and edate != null">
+			<if  test="sdate != '' and edate != ''">
+			
+			AND io_date BETWEEN #{sdate} AND #{edate}</if>
+			</if>
+		</where>
+		ORDER BY io_date DESC, io_time DESC
+
+	</select>
 	<insert id="insertOrUpdate" parameterType="IolistVO">
 
 
-		INSERT INTO tbl_iolist(io_seq,io_date,io_time,io_input,io_pname,io_price,io_quan,io_total
+		INSERT INTO
+		tbl_iolist(io_seq,io_date,io_time,io_input,io_pname,io_price,io_quan,io_total
 		)
 		VALUES(#{io_seq},#{io_date},#{io_time},#{io_input},#{io_pname},#{io_price},#{io_quan},#{io_total}
 		)
 		ON DUPLICATE KEY UPDATE
 		io_date = #{io_date},
-		io_time  = #{io_time},
-		io_input  = #{io_input},
-		io_pname  = #{io_pname},
-		io_price  = #{io_price},
-		io_quan  = #{io_quan},
-		io_total  = #{io_total}
+		io_time = #{io_time},
+		io_input = #{io_input},
+		io_pname = #{io_pname},
+		io_price = #{io_price},
+		io_quan = #{io_quan},
+		io_total = #{io_total}
 	</insert>
-	
-	
+
 	<update id="update"></update>
 
 	<select id="create_iolist_table">
