@@ -13,6 +13,14 @@
 		<org.springframework-version>5.2.25.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -35,6 +43,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.shin285</groupId>
+			<artifactId>KOMORAN</artifactId>
+			<version>3.3.9</version>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
 		<dependency>
@@ -51,6 +65,8 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.5.15</version>
 		</dependency>
+
+
 
 		<!--mybatis-spring -->
 
