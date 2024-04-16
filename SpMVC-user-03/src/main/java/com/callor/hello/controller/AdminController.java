@@ -1,0 +1,14 @@
+package com.callor.hello.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@RequestMapping(value="/admin")
+public class AdminController {
+	
+	@RequestMapping(value={"/",""}, method=RequestMethod.GET)
+	public String home() {
+		return null;
+	}
+
+}
