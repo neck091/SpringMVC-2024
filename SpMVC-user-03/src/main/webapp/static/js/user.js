@@ -7,14 +7,49 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const btn_join = join_form.querySelector("button");
 
-  btn_join.addEventListener("click", () => {
+  // username 은 영대소문자와 언더바를 사용할 수 있으며 4-20글자까지 가능
+  const userNameExp = /^[a-zA-Z0-9_]{4,20}$/;
+  const passwordExp = /^[a-zA-Z0-9_!@#$%^&*()]{8,20}$/;
+  const idCheck = async (username) => {
+    try {
+      const res = await fetch(`${rootPath}/user/idcheck/${username}`);
+      // const json = await res.json() 서버가 json 타입의 데이터를 보낼 때
+      const result = await res.text();
+      return result === "OK";
+    } catch (error) {
+      alert("통신오류");
+    }
+  };
+
+  btn_join.addEventListener("click", async () => {
     if (!username.value) {
       alert("USERNAME 은 반드시 입력하세요");
       username.select();
       return false;
     }
+
+    if (!userNameExp.test(username.value)) {
+      alert("영문대소문자,숫자,_로 4~20글자만 가능");
+
+      username.select();
+      return false;
+    }
+
+    if (!(await idCheck(username.value))) {
+      alert("이미 가입됨");
+      username.select();
+      return false;
+    }
+
     if (!password.value) {
       alert("PASSWORD 는 반드시 입력하세요");
+      password.select();
+      return false;
+    }
+
+    if (!passwordExp.test(password.value)) {
+      alert("비밀번호는 8자리 이상 영문, 숫자 특수문자만 가능");
+
       password.select();
       return false;
     }

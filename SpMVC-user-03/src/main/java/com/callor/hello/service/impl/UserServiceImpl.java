@@ -90,6 +90,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	/*
+	 * controller 에서 dao 통하여 user 정보 조회
+	 * 그렇게 하려면 controller 에서 userdao 객체를 선언, 주입을 받아야 함
+	 * 여러곳에서 객체를 주입받는 것도 일종의 메모리 낭비가 될 수 있음.
+	 *  어차피 controller에서는 userserivce를 주입받고 있고 
+	 *  userservice에서는 userdao를 가지고 있으므로 userservice에
+	 *  method 하나를 생성하여 사용하는 것이 
+	 *  메모리 관리 측면에서 다소 유리.
+	 *  userdao.findById method 호출, return 값을 controller에게 toss만 하도록 한다.
+	 */
+	
+	@Override
+	public UserVO findById(String username) {
+		// TODO Auto-generated method stub
+		return userDao.findById(username);
+	}
+
+
 
 
 }
