@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -65,9 +66,13 @@
 </head>
 <body>
 <h1>Hello!! Korea</h1>
-<textarea id="inputText" style="width: 500px; height: 500px;"></textarea>
+  <form method="post">
+<textarea name="text" rows="5" cols="50" id="inputText" style="width: 500px; height: 500px;"></textarea>
 <p>현재 입력한 글자 수: <span id="currentChar">0</span> / 최대 글자 수: <span id="maxChar">300</span></p>
-<button id="showResultBtn">결과 보기</button>
+<button type="submit" id="showResultBtn">결과 보기</button>
+</form>
 <div id="displayText"></div>
+
+	<tiles:insertAttribute name="nresult" />
 </body>
 </html>
