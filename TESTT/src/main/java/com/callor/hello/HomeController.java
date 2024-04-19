@@ -1,16 +1,17 @@
 package com.callor.hello;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.callor.hello.service.PopService;
 import com.callor.hello.service.SpService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,31 +23,42 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 
     private final SpService spService;
+    private final PopService popService;
+    
 
-    @Autowired
-    public HomeController(SpService spService) {
-        this.spService = spService;
-    }
+    public HomeController(SpService spService, PopService popService) {
+		super();
+		this.spService = spService;
+		this.popService = popService;
+	}
 
-    @RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
     public String showForm() {
         return "form"; // form.html로 이동
     }
 
-//    @RequestMapping(value="/", method=RequestMethod.POST)
-//    public String extractNouns(String text, Model model) {
-//    	log.debug("한글: {}", text);
-//    	model.addAttribute("nouns", spService.extractNouns(text));
-//        return "form";
-//    }
-    
-    @RequestMapping(value="/extractNouns", method=RequestMethod.POST)
-    public @ResponseBody Map<String, Object> extractNouns(@RequestParam("text") String text) {
-        List<String> nouns = spService.extractNouns(text);
-        
-        Map<String, Object> response = new HashMap<>();
-        response.put("nouns", nouns);
-        
-        return response;
+    @RequestMapping(value="/noun", method=RequestMethod.GET)
+    public String extractNouns(String text, Model model) {
+    	log.debug("한글: {}", text);
+    	model.addAttribute("nouns", spService.extractNouns(text));
+        return "form";
     }
+    
+
+    @RequestMapping(value="/words", method=RequestMethod.GET)
+    public String showWords(String word, Model model) {
+    	
+        try {
+            List<String> words = popService.scrapeWords(word);
+            model.addAttribute("words", words);
+        } catch (IOException e) {
+            // Handle error
+            e.printStackTrace();
+        }
+        return "form";
+    	
+    }
+
+    
+
 }
