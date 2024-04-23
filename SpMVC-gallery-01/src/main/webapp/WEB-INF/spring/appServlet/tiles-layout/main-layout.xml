@@ -12,7 +12,7 @@
 	</definition>
 
 	<definition name="home" extends="default">	
-	<put-attribute name="content" value=""/>
+	<put-attribute name="content" value="/WEB-INF/views/gallery/list.jsp"/>
 	</definition>
 
 

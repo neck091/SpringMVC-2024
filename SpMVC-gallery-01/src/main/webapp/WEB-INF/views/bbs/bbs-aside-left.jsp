@@ -6,6 +6,6 @@
 <nav class="bbs">
 <ul>
 <li><a href="${rootPath}/bbs/free/write"> 글쓰기</a></li>
-<li><a href="${rootPath}/bbs/free/list">인기글</a></li>
+<li><a href="${rootPath}/bbs/free/like">인기글</a></li>
 </ul>
 </nav>

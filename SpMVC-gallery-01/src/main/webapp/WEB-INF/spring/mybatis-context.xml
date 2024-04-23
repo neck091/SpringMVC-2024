@@ -16,7 +16,7 @@
 		<property name="username" value="root" />
 		<property name="password" value="!Biz8080" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/bbsDB" />
+			value="jdbc:mysql://localhost:3306/galleryDB" />
 	</bean>
 
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean"

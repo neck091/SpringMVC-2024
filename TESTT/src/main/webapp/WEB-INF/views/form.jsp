@@ -6,33 +6,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#nounList').on('click', 'li', function() {
-			var noun = $(this).text();
-			$.ajax({
-				url : '${rootPath}/words',
-				type : 'GET',
-				data : {
-					word : noun
-				},
-				success : function(response) {
-					console.log('단어 전송 완료');
-					var adjacentWords = response.words;
-					var listItems = "";
-					for (var i = 0; i < adjacentWords.length; i++) {
-						listItems += "<li>" + adjacentWords[i] + "</li>";
-					}
-					$('#adjacentWordList').html(listItems);
-				},
-				error : function(xhr, status, error) {
-					console.error('에러 발생:', error);
-				}
-			});
-		});
-	});
+$(document).ready(function() {
+    $('#nounList').on('mouseenter', 'li', function() {
+        var noun = $(this).text();
+        $.ajax({
+            url : '${rootPath}/words',
+            type : 'GET',
+            data : {
+                word : noun
+            },
+            success : function(response) {
+                console.log('단어 전송 완료');
+                // 받은 결과를 화면에 표시
+                $('#wordResult').empty(); // 이전 결과를 비우고
+                $.each(response, function(index, word) {
+                    $('#wordResult').append('<li>' + word + '</li>'); // 단어 목록 추가
+                });
+            },
+            error : function(xhr, status, error) {
+                console.error('에러 발생:', error);
+            }
+        });
+    });
+});
 </script>
 </head>
 <body>
@@ -49,8 +49,8 @@
 			<li>${noun}</li>
 		</c:forEach>
 	</ul>
+	<h1>단어 결과</h1>
+<div id="wordResult"></div>
 
-	<!-- 받은 인접어휘 리스트를 여기에 추가 -->
-	<ul id="adjacentWordList"></ul>
 </body>
 </html>
