@@ -11,29 +11,13 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="${rootPath}/static/js/spell.js?2024-04-02-020"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#nounList').on('mouseenter', 'li', function() {
-        var noun = $(this).text();
-        $.ajax({
-            url : '${rootPath}/words',
-            type : 'GET',
-            data : {
-                word : noun
-            },
-            success : function(data) {
-                $('#wordsList').empty(); // 기존 목록 비우기
-                $.each(data, function(index, word) {
-                    $('#wordsList').append('<li>' + word + '</li>'); // 새로운 항목 추가
-                });
-            }
-        
-        });
-    });
-});
+<script>
+//js  파일에서 사용할 rootPath 변수 선언
+const rootPath = "${rootPath}"
 </script>
-<link rel="stylesheet"
-	href="${rootPath}/static/css/main.css?2024-04-02-09">
+<script src="${rootPath}/static/js/sp.js?2024-04-02-02d0"></script>
+<link rel="stylesheet" href="${rootPath}/static/css/main.css?2024-04-02-09">
+<link rel="stylesheet" href="${rootPath}/static/css/modal.css?2024-04-02-09">
 <style>
 em.green_text {
 	/* color: 띄어쓰기; */
@@ -66,7 +50,7 @@ em.blue_text {
 			<div class="section">
 				<p>글씨 입력하기</p>
 				<form id="myForm" method="get">
-					<textarea  id="inputText" name="text" rows="5"  ></textarea>
+					<textarea id="inputText" name="text" rows="5"></textarea>
 					<p>
 						현재 입력한 글자 수: <span id="currentChar">0</span> / 최대 글자 수: <span
 							id="maxChar">300</span>
@@ -83,20 +67,35 @@ em.blue_text {
 		<aside class="right">
 			<div class="section">
 				<p>추천단어</p>
-				<ul id="nounList">
+				<ul id="nounList" class="nounList">
 					<!-- 명사 리스트를 순회하며 출력 -->
 					<c:forEach var="noun" items="${nouns}">
-						<li >${noun}</li>
+						<li>${noun}</li>
 					</c:forEach>
 				</ul>
 			</div>
-				<div class="section">
-				  <p>추천단어</p>
-                <ul id="wordList">
-                    <c:forEach var="word" items="${words}">
-                        <li>${word}</li>
-                    </c:forEach>
-                </ul>
+
+			<!-- 모달 창 -->
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<ul id="modalWordsList"></ul>
+				</div>
+			</div>
+
+
+			<div class="section">
+				<p>관련어</p>
+				<ul id="wordsList">
+					<c:if test="${not empty words}">
+						<c:forEach var="word" items="${words}">
+							<li>${word}</li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty words}">
+						<li>관련어가 없습니다.</li>
+					</c:if>
+				</ul>
 			</div>
 		</aside>
 	</section>

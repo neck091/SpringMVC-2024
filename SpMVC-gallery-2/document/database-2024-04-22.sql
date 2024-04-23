@@ -13,5 +13,3 @@ g_image	LONGTEXT	NOT NULL
 );
 
 DESC tbl_gallerys;
-
-SELECT * FROM tbl_gallerys;
