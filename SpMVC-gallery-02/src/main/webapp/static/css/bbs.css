@@ -1,0 +1,15 @@
+section.bbs.layout {
+  display: flex;
+  gap: 5px;
+
+  aside {
+    margin: 10px;
+    border: 1px solid blue;
+  }
+  .bbs-left-side {
+    flex: 1;
+  }
+  .bbs-right-side {
+    flex: 3;
+  }
+}

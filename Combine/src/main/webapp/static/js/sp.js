@@ -64,28 +64,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   var nounList = document.getElementById("nounList");
   var modalWordsList = document.getElementById("modalWordsList");
-  var timeoutId;
 
   nounList.addEventListener("click", function (event) {
     if (event.target.tagName === "LI") {
       var noun = event.target.textContent;
       fetchData(noun);
+      openModal(); // 모달 창 열기
     }
-  });
-
-  nounList.addEventListener("mouseover", function (event) {
-    if (event.target.tagName === "LI") {
-      var noun = event.target.textContent;
-      // 마우스를 2초 동안 올렸을 때 모달 창 열기
-      timeoutId = setTimeout(function () {
-        fetchData(noun);
-      }, 2000); // 2초 (2000 밀리초)
-    }
-  });
-
-  nounList.addEventListener("mouseout", function () {
-    // 마우스를 벗어났을 때 타이머 초기화
-    clearTimeout(timeoutId);
   });
 
   function fetchData(noun) {
@@ -109,7 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
           li.textContent = "관련어가 없습니다.";
           modalWordsList.appendChild(li);
         }
-        openModal(); // 모달 창 열기
       } else {
         console.error("Request failed. Status:", xhr.status);
       }

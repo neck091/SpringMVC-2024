@@ -11,7 +11,7 @@ public class BbsNoticeController {
 	
 	
 	@RequestMapping(value={"/","" }, method=RequestMethod.GET )
-	public String free() {
+	public String home() {
 		return null;
 	}
 	

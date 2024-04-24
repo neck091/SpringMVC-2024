@@ -1,50 +1,70 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const mainNav = document.querySelector("ui.nounList");
-  const navItems = mainNav.querySelectorAll("li");
+document.addEventListener("DOMContentLoaded", function () {
+  // textarea 요소와 다른 필요한 요소들을 DOM으로부터 가져옴
+  var textarea = document.getElementById("inputText");
+  var nounList = document.getElementById("nounList");
+  var modalWordsList = document.getElementById("modalWordsList");
+  var currentCharDisplay = document.getElementById("currentChar");
+  var maxCharDisplay = document.getElementById("maxChar");
+  var submitBtn = document.getElementById("showResultBtn");
 
-  mainNav?.addEventListener("click", (e) => {
-    const target = e.target;
+  // 최대 글자 수 설정
+  var maxChar = 300;
+  maxCharDisplay.textContent = maxChar;
 
-    if (target.tagName == "LI") {
-      const className = target.classList[0];
-      const url = NAV_INDEX[className].url;
-      document.location.href = `${rootPath}${url}`;
-      //nav 가 클릭됐을때 active 한 uI를 보여주기 위한 설정
-      //그런데 nav를 클릭하면 화면이 refresh 되어버리기 때문에 의미가 없음
-      // //active라는 class 제거
-      // navItems.forEach((item) => {
-      //   item.classList.remove("active");
-      // });
-      // //클릭된 항목에 active 클래스 추가
-      // target.classList.add("active");
+  // textarea 입력 이벤트 리스너 추가
+  textarea.addEventListener("input", function (event) {
+    var text = event.target.value;
+    var charCount = text.length;
+    currentCharDisplay.innerText = charCount;
+
+    // 스페이스바, 점 또는 쉼표를 눌렀을 때 폼 제출
+    var lastChar = text.charAt(charCount - 1);
+    if (lastChar === " " || lastChar === "." || lastChar === ",") {
+      submitForm();
     }
   });
-});
 
-$(document).ready(function () {
-  $("#nounList").on("mouseenter", "li", function () {
-    var noun = $(this).text();
-    $.ajax({
-      url: "${rootPath}/words",
-      type: "GET",
-      data: {
-        word: noun,
-      },
-      success: function (data) {
-        console.log(data); // 받은 JSON 데이터 콘솔에 출력
-        var $wordsList = $("#wordsList");
-        $wordsList.empty(); // 기존 목록 비우기
-        if (data.length > 0) {
-          $.each(data, function (index, word) {
-            $wordsList.append("<li>" + word + "</li>"); // 새로운 항목 추가
-          });
-        } else {
-          $wordsList.append("<li>관련어가 없습니다.</li>");
-        }
-      },
-      error: function (xhr, status, error) {
-        console.log(error); // 오류 발생 시 콘솔에 출력
-      },
-    });
+  // 명사 리스트에서 클릭 이벤트 리스너 추가
+  nounList.addEventListener("click", function (event) {
+    if (event.target.tagName === "LI") {
+      var selectedWord = event.target.textContent;
+      replaceWordWithNoun(selectedWord);
+    }
   });
+
+  // 모달 리스트에서 클릭 이벤트 리스너 추가
+  modalWordsList.addEventListener("click", function (event) {
+    if (event.target.tagName === "LI") {
+      var selectedWord = event.target.textContent;
+      replaceWordWithNoun(selectedWord);
+      closeModal(); // 모달 닫기
+    }
+  });
+
+  // 폼 제출 함수
+  function submitForm() {
+    document.getElementById("myForm").submit();
+  }
+
+  // 단어 교체 함수
+  function replaceWordWithNoun(selectedWord) {
+    var sentence = textarea.value; // 텍스트 에어리어의 문장
+    var nouns = []; // 텍스트 에어리어에서 추출된 명사 목록
+
+    // 추출된 명사 목록에서 선택한 단어와 일치하는 명사를 찾아 교체
+    for (var i = 0; i < nouns.length; i++) {
+      if (nouns[i] === selectedWord) {
+        // 명사를 선택한 단어로 교체
+        sentence = sentence.replace(nouns[i], selectedWord);
+      }
+    }
+
+    // 교체된 문장을 텍스트 에어리어에 설정
+    textarea.value = sentence;
+  }
+
+  // 모달 창 닫기 함수
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+  }
 });

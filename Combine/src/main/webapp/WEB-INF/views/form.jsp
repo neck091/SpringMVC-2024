@@ -10,14 +10,15 @@
 <title>맞춤법 검사</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="${rootPath}/static/js/spell.js?2024-04-02-020"></script>
+<script src="${rootPath}/static/js/spell.js?2024-04-02-0200"></script>
 <script>
 //js  파일에서 사용할 rootPath 변수 선언
 const rootPath = "${rootPath}"
 </script>
-<script src="${rootPath}/static/js/sp.js?2024-04-02-02d0"></script>
+<script src="${rootPath}/static/js/sp.js?2d024-042f"></script>
+<script src="${rootPath}/static/js/wtf.js?2d0s24-0d"></script>
 <link rel="stylesheet" href="${rootPath}/static/css/main.css?2024-04-02-09">
-<link rel="stylesheet" href="${rootPath}/static/css/modal.css?2024-04-02-09">
+<link rel="stylesheet" href="${rootPath}/static/css/modal.css?2024-04-2-09">
 <style>
 em.green_text {
 	/* color: 띄어쓰기; */
@@ -70,7 +71,7 @@ em.blue_text {
 				<ul id="nounList" class="nounList">
 					<!-- 명사 리스트를 순회하며 출력 -->
 					<c:forEach var="noun" items="${nouns}">
-						<li>${noun}</li>
+						<li class="hover" >${noun}</li>
 					</c:forEach>
 				</ul>
 			</div>
