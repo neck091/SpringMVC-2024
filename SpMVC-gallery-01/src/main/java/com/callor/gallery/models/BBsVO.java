@@ -10,11 +10,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class BBsVO {
-
 	private String b_id;
 	private String b_date;
 	private String b_time;

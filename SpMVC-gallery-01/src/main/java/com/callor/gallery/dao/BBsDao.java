@@ -4,27 +4,26 @@ import java.util.List;
 
 import com.callor.gallery.models.BBsVO;
 
-
 /*
- * Generic interface ìƒì†í•˜ì—¬ Dao interface ë§Œë“¤ê¸°
- * GenericDaoì— ì„ ì–¸ëœ 5ê°€ì§€  CRUD methodëŠ” ê·¸ëŒ€ë¡œ ìƒì†ë°›ìŒ
- * ì´ë•Œ return typeê³¼ pkë§¤ê°œë³€ìˆ˜ì˜ typeì„ í•„ìš”í•œ ìš”ì†Œë¡œ ëŒ€ì²´
- * ëŒ€ì²´í•  ë•Œ Generic Type(<>)ì— ëª…ì‹œ
- * ê·¸ì™¸ í•„ìš”í•œ ëª…ë ¹ì–´ê°€ ìˆìœ¼ë©´ ë³„ë„ë¡œ ì„ ì–¸í•˜ì—¬ ì‚¬ìš© ê°€ëŠ¥
- * bbsì—” ì´ 8ê°œì˜ methodê°€ ì„ ì–¸ë˜ëŠ” ê²ƒê³¼ ê°™ìŒ
- * */
-public interface BBsDao extends GenericDao<BBsVO, String>{
+ * Generic interface »ó¼ÓÇÏ¿© Dao interface ¸¸µé±â
+ * GenerucDao ¿¡ ¼±¾ğµÈ 5°¡Áö CRUD method ´Â ±×´ë·Î »ó¼ÓÀ» ¹Ş´Â´Ù
+ * 		ÀÌ¶§ Return type °ú PK ¸Å°³º¯¼öÀÇ type À» ÇÊ¿äÇÑ ¿ä¼Ò·Î ´ëÃ¼ÇÑ´Ù
+ * 		´ëÃ¼ÇÒ¶§ Generic Type(<>)¿¡ ¸í½ÃÇØ ÁØ´Ù
+ * ±× ¿Ü¿¡ ÇÊ¿äÇÑ method °¡ ÀÖÀ¸¸é º°µµ·Î ¼±¾ğÇÏ¿© »ç¿ëÇÒ ¼ö ÀÖ´Ù
+ * 
+ * 	°á±¹ BBsDao ¿¡´Â ÃÑ 8°¡ÁöÀÇ method °¡ ¼±¾ğµÇ´Â °Í°ú °°´Ù
+ */
+public interface BBsDao extends GenericDao<BBsVO, String> {
 	
 	public List<BBsVO> findByDate(String sdate, String edate);
 	public List<BBsVO> findBySubject(String subject);
-	public List<BBsVO> findByContent(String content);
+	public List<BBsVO> findContent(String content);
 	
-//	
 //	public List<BBsVO> selectAll();
 //	public BBsVO findById(String pk);
 //	
 //	public int insert(BBsVO vo);
 //	public int update(BBsVO vo);
 //	public int delete(String pk);
-	
+
 }

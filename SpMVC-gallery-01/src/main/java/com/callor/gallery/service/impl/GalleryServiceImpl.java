@@ -10,40 +10,53 @@ import com.callor.gallery.dao.GalleryDao;
 import com.callor.gallery.models.GalleryVO;
 import com.callor.gallery.service.GalleryService;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
-public class GalleryServiceImpl  implements GalleryService{
+public class GalleryServiceImpl implements GalleryService{
 	
 	private final GalleryDao galleryDao;
 	
 	public GalleryServiceImpl(GalleryDao galleryDao) {
-		super();
 		this.galleryDao = galleryDao;
 	}
-
+	
+	
 	/*
-	 * ì…ë ¥ í™”ë©´ì—ì„œ ì œëª©, ë‚´ìš©, ì´ë¯¸ì§€(base64)ë¥¼ ì „ë‹¬ë°›ê³ 
-	 * ì—¬ê¸°ì— ì‘ì„±ì¼ì, ì‘ì„±ì‹œê°, PKê°’ì„ ìƒì„±í•˜ì—¬ VOë¥¼ ë‹¤ì‹œ ì„¸íŒ…í•˜ê³  
-	 * Daoì— ì „ë‹¬í•˜ì—¬ ë°ì´í„°ë¥¼ã„¹ insertí•˜ë„ë¡ í•˜ê¸°
+	 * ÀÔ·ÂÈ­¸é¿¡¼­ Á¦¸ñ, ³»¿ë, ÀÌ¹ÌÁö(base64)¸¦ Àü´Ş¹Ş°í
+	 * ¿©±â¿¡ ÀÛ¼ºÀÏÀÚ, ÀÛ¼º½Ã°¢, PK °ª¤·¸£ »ı¼ºÇÏ¿© VO ¸¦ ´Ù½Ã ¼¼ÆÃÇÏ°í
+	 * Dao ¿¡ Àü´ŞÇÏ¿© µ¥ÀÌÅÍ¸¦ insert ÇÏµµ·Ï ÇÏ±â
 	 */
+	
+
+
 
 	@Override
 	public GalleryVO createGallery(GalleryVO vo) {
-	LocalDateTime lt = LocalDateTime.now();
-	DateTimeFormatter date = DateTimeFormatter.ofPattern("YYYY-MM-dd");
-	DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
-	
-	vo.setG_id(UUID.randomUUID().toString());
-	vo.setG_date(lt.format(date));
-	vo.setG_time(lt.format(time));
-	vo.setG_author("email@email.com");
-	int ret = galleryDao.insert(vo);
-	if(ret>0) {
-		return vo;
+		
+		LocalDateTime lt = LocalDateTime.now();
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("YYY-MM-dd");
+		DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+		
+		/*
+		 * UUID v5(¶Ç´Â v4) ¸¦ »ç¿ëÇÏ±â À§ÇÏ¿© randomUUID() method ¸¦ È£ÃâÇÏ¿©
+		 * UUID °ªÀ» ¸¸µé±â
+		 */
+		vo.setG_id(UUID.randomUUID().toString());
+		vo.setG_date(lt.format(date));
+		vo.setG_time(lt.format(time));
+		vo.setG_author("loo919239@gmail.com");
+		
+		log.debug("ID {}, date {}, time {}, subject {}", vo.getG_id(), vo.getG_date(), vo.getG_time(), vo.getG_subject());
+		
+		int ret = galleryDao.insert(vo);
+		if(ret > 0) {
+			return vo;
+		}
+		
+		return null;
 	}
-	return null;
 	
-
-	}
 
 }

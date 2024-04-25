@@ -1,0 +1,13 @@
+section.bbs-layout {
+  display: flex;
+  .bbs-left-side {
+    margin: 10px;
+    border: 1px solid blue;
+    flex: 1;
+  }
+  .bbs-right-side {
+    margin: 10px;
+    border: 1px solid blue;
+    flex: 3;
+  }
+}

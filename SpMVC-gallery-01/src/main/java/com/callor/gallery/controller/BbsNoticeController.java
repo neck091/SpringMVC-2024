@@ -5,20 +5,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value="/bbs/notice")
-public class BbsNoticeController {
+@RequestMapping(value = "/bbs/notice")
+public class BBsNoticeController {
 	
-	
-	
-	@RequestMapping(value={"/","" }, method=RequestMethod.GET )
-	public String home() {
+	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
+	public String free() {
 		return null;
 	}
 	
-	@RequestMapping(value="/notice/write", method =RequestMethod.GET)
+	@RequestMapping(value = "/like", method = RequestMethod.GET)
+	public String like() {
+		return null;
+	}
+	
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write() {
 		return null;
 	}
 
-	
 }
