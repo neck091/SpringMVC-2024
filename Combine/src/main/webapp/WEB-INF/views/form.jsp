@@ -16,7 +16,7 @@
 const rootPath = "${rootPath}"
 </script>
 <script src="${rootPath}/static/js/sp.js?2d024-042f"></script>
-<script src="${rootPath}/static/js/wtf.js?2d0s24-0d"></script>
+<script src="${rootPath}/static/js/wtf.js?2d"></script>
 <link rel="stylesheet" href="${rootPath}/static/css/main.css?2024-04-02-09">
 <link rel="stylesheet" href="${rootPath}/static/css/modal.css?2024-04-2-09">
 <style>

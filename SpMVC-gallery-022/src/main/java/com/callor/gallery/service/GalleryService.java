@@ -3,15 +3,20 @@ package com.callor.gallery.service;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.callor.gallery.models.GalleryVO;
 
 public interface GalleryService {
 
-	List<GalleryVO> selectAll();
+	public  List<GalleryVO> selectAll();
 
 
 
-	GalleryVO createGallery(GalleryVO galleryVO, MultipartFile image_file) throws Exception;
+	public 	GalleryVO createGallery(GalleryVO galleryVO, MultipartFile image_file) throws Exception;
+
+
+
+	public List<GalleryVO> createGallery(GalleryVO galleryVO, MultipartHttpServletRequest image_files)throws Exception;
 
 }
