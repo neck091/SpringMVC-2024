@@ -3,12 +3,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-
+	
+		<!-- mybatis-context.xml 이 root 영역에 설정되어
+		appservlet영역에 transaction 전파가 안되는 현상이 있다. 
+		이 때는 servlet-context.xml에 tx:annotaion-driven 을 설정하고 
+		proxy-target-class="true" 로 설정.
+		-->
+<tx:annotation-driven proxy-target-class="true"/>
 	<!-- Handles HTTP GET requests for /static/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/static/**" location="/static/" />
 	<!-- view 화면에서 참조할 /upload/라는 path를 실제로컬스토리지 /app/upload 라는 폴더와 연결하라 -->

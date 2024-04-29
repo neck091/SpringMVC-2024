@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.callor.gallery.models.ImageVO;
 import com.callor.gallery.service.FileUploadService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -81,20 +82,30 @@ public class FileUploadServiceImpl implements FileUploadService{
 		//실제 저장된 업로드 파일의 이름을 return
 		return upLoadFileName;
 	}
+	
+	
+	/*
+	 * 업로드된 멀티파일을 List type의 MultipartFile 로 분해하기
+	 * 업로드된 멀티파일을 추출하기 위해서 ㅍㅏ일즈 getFiles(이름) 을 사용
+	 * form input tag 에 붙여진걸 사용
+	 */
 
 	@Override
-	public List<String> filesUpload(MultipartHttpServletRequest files) throws Exception {
+	public List<ImageVO> filesUpload(MultipartHttpServletRequest files) throws Exception {
 		// TODO Auto-generated method stub
 		
 		List<MultipartFile> result  = files.getFiles("image_files"); 
-		List<String> resultFileNames = new ArrayList<String>();
+		List<ImageVO> resultImages = new ArrayList<>();
 		
 		for(MultipartFile f : result) {
 			String resName = this.fileUpload(f);
-			resultFileNames.add(resName);
+			resultImages.add(ImageVO.builder()
+					.i_id(UUID.randomUUID().toString())
+					.i_origin_image(f.getOriginalFilename())
+					.i_up_image(resName).build());
 		}
 		
-		return resultFileNames;
+		return resultImages;
 	}
 	
 }

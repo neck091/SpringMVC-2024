@@ -55,7 +55,7 @@ $(document).ready(function () {
   document.getElementById("inputText").value = textValue;
 
   const inputText = textValue; // textValue 사용
-  var passportKey = "9174b407ac9ae3de9f16e75ddb56cb306aebd813";
+  var passportKey = "19580ac709556cf2ce4842c705f7cac80d59953d";
   $.getJSON(
     "https://m.search.naver.com/p/csearch/ocontent/util/SpellerProxy",
     {

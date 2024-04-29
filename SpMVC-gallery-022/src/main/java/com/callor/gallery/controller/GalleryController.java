@@ -82,7 +82,7 @@ private final GalleryService galleryService;
 				 List<GalleryVO> VOs = galleryService.createGallery(galleryVO, image_files);
 			}
 				
-			resultVO = galleryService.createGallery(galleryVO,image_file);
+//			resultVO = galleryService.createGallery(galleryVO,image_file);
 			model.addAttribute("GALLERY",resultVO);
 			
 		} catch (Exception e) {

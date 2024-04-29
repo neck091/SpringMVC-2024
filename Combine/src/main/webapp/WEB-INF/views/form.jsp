@@ -15,10 +15,9 @@
 //js  파일에서 사용할 rootPath 변수 선언
 const rootPath = "${rootPath}"
 </script>
-<script src="${rootPath}/static/js/sp.js?2d024-042f"></script>
-<script src="${rootPath}/static/js/wtf.js?2d"></script>
-<link rel="stylesheet" href="${rootPath}/static/css/main.css?2024-04-02-09">
-<link rel="stylesheet" href="${rootPath}/static/css/modal.css?2024-04-2-09">
+<script src="${rootPath}/static/js/pop.js?d224-0d4d2f"></script>
+<link rel="stylesheet" href="${rootPath}/static/css/main.css?204-04-0-09">
+<link rel="stylesheet" href="${rootPath}/static/css/modal.css?202d4-04-2-09">
 <style>
 em.green_text {
 	/* color: 띄어쓰기; */
@@ -67,7 +66,7 @@ em.blue_text {
 		</aside>
 		<aside class="right">
 			<div class="section">
-				<p>추천단어</p>
+				<h3>추천단어</h3>
 				<ul id="nounList" class="nounList">
 					<!-- 명사 리스트를 순회하며 출력 -->
 					<c:forEach var="noun" items="${nouns}">
@@ -82,21 +81,6 @@ em.blue_text {
 					<span class="close">&times;</span>
 					<ul id="modalWordsList"></ul>
 				</div>
-			</div>
-
-
-			<div class="section">
-				<p>관련어</p>
-				<ul id="wordsList">
-					<c:if test="${not empty words}">
-						<c:forEach var="word" items="${words}">
-							<li>${word}</li>
-						</c:forEach>
-					</c:if>
-					<c:if test="${empty words}">
-						<li>관련어가 없습니다.</li>
-					</c:if>
-				</ul>
 			</div>
 		</aside>
 	</section>
