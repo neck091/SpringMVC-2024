@@ -8,7 +8,6 @@ import com.callor.gallery.models.ImageVO;
 
 public interface ImageDao  extends GenericDao<ImageVO, String>{
 
-	public void create_table(String string);
 
 	
 	/*

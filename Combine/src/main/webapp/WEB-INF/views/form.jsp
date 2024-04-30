@@ -10,9 +10,8 @@
 <title>맞춤법 검사</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="${rootPath}/static/js/spell.js?2024-04-02-0200"></script>
+<script src="${rootPath}/static/js/spell.js?2024-04-02-0sd2"></script>
 <script>
-//js  파일에서 사용할 rootPath 변수 선언
 const rootPath = "${rootPath}"
 </script>
 <script src="${rootPath}/static/js/pop.js?d224-0d4d2f"></script>

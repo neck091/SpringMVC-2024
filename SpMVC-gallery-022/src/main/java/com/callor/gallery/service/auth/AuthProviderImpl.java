@@ -23,7 +23,7 @@ public class AuthProviderImpl implements AuthenticationProvider{
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		
-		if(username == null || username.isBlank() ||  username.equalsIgnoreCase("callor")) {
+		if(username == null || username.isBlank() || !username.equalsIgnoreCase("callor")) {
 			throw new UsernameNotFoundException("사용자이름 확인");
 		}
 		

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.callor.hello.service.CheckService;
 import com.callor.hello.service.PopService;
 import com.callor.hello.service.SpService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,11 +29,14 @@ public class HomeController {
 
 	private final SpService spService;
 	private final PopService popService;
+	private final CheckService checkService;
 
-	@Autowired
-	public HomeController(SpService spService, PopService popService) {
+
+	public HomeController(SpService spService, PopService popService, CheckService checkService) {
+		super();
 		this.spService = spService;
 		this.popService = popService;
+		this.checkService = checkService;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -59,4 +63,7 @@ public class HomeController {
 
 		return jsonWords;
 	}
+	
+
+	
 }

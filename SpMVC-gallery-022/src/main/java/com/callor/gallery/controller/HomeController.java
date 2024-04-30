@@ -32,7 +32,7 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		List<GalleryVO> gList = galleryDao.selectAll();
 		model.addAttribute("GALLERYS",gList);
-		return "home";
+		return "gallery/list";
 	}
 	
 }

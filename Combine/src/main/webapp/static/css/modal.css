@@ -45,6 +45,11 @@
 ul {
   list-style: none;
 }
+li {
+  width: 90%;
+  border-radius: 8px;
+  padding: 5px;
+}
 li:hover {
-  background-color: #b8b9d1;
+  background-color: #e3e3e6;
 }
