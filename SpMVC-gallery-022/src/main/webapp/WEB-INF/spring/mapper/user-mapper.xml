@@ -13,8 +13,13 @@
 	</select>
 
 
-	<insert id="inserts">
+	<insert id="insert">
 
+		INSERT INTO tbl_users(username,password,email,tel)
+		VALUES(
+		#{
+		username},#{password},#{email},#{tel}
+		)
 
 
 	</insert>
@@ -25,9 +30,11 @@
 	<select id="create_table">
 		CREATE TABLE IF NOT EXISTS tbl_users (
 
-		username VARCHAR(125) PRIMARY KEY,
+		username
+		VARCHAR(125) PRIMARY KEY,
 		password VARCHAR(125) NOT NULL,
-		email VARCHAR(125) NOT NULL,
+		email
+		VARCHAR(125) NOT NULL,
 		tel VARCHAR(125) NOT NULL
 		)
 	</select>

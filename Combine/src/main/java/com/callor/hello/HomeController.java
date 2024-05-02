@@ -65,5 +65,11 @@ public class HomeController {
 	}
 	
 
-	
+	@RequestMapping(value = "/check", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+    public String check(String inputText, Model model) {
+        String result = checkService.checkGrammar(inputText); // 서비스를 통해 맞춤법 검사 결과 가져오기
+
+        return result; // 결과 페이지 js에 전달
+    }	
 }

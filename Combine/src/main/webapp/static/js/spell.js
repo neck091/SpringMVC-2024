@@ -62,7 +62,9 @@ $(document).ready(function () {
   document.getElementById("inputText").value = textValue;
 
   const inputText = textValue; // textValue 사용
-  var passportKey = "19580ac709556cf2ce4842c705f7cac80d59953d";
+
+  //네이버에서 실시간으로 맞춤법 검사, 결과 출력
+  var passportKey = "c563836e3c95b051431dc050c426d249c81cf998";
   $.getJSON(
     "https://m.search.naver.com/p/csearch/ocontent/util/SpellerProxy",
     {

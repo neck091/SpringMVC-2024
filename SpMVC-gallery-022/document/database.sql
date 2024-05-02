@@ -1,8 +1,27 @@
 USE galleryDB2;
 
-DESC tbl_images;
-SELECT * FROM tbl_gallerys;
-SELECT * FROM tbl_images;
+SHOW TABLES;
+SELECT * FROM tbl_roles;
+SELECT * FROM tbl_users;
 
-DROP TABLE tbl_images;
-DROP TABLE tbl_gallerys;
+DROP TABLE tbl_roles;
+DROP TABLE tbl_users;
+
+DESC tbl_roles;
+CREATE TABLE tbl_users(
+
+username	VARCHAR(125)	PRIMARY KEY,
+password	VARCHAR(125)	NOT NULL,
+email	VARCHAR(125)	NOT NULL,
+tel	VARCHAR(125)	NOT NULL
+);
+	CREATE TABLE IF NOT EXISTS tbl_roles (
+		r_username VARCHAR(125) ,
+		r_role VARCHAR(125) NOT NULL,
+        CONSTRAINT PK_ROLE
+        PRIMARY KEY (r_username,r_role)
+        ,
+		CONSTRAINT FK_USER
+		FOREIGN KEY (r_username)
+		REFERENCES tbl_users(username) ON DELETE CASCADE
+);

@@ -9,7 +9,7 @@ import com.callor.gallery.models.RoleVO;
 
 public interface RoleDao extends GenericDao<RoleVO, String> {
 	
-	public int insert(
+	public int inserts(
 			
 			@Param("roles") List<RoleVO> vo ,
 			@Param("username")String username);
