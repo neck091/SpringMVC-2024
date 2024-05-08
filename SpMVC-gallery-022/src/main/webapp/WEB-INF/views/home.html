@@ -55,14 +55,21 @@
           href=""
           th:href="@{/user/mypage}"
           sec:authorize="isAuthenticated()"
-          >마이페이지( <span sec:authentication="principal"></span>)
+          >마이페이지(
+          <span sec:authentication="principal.username"></span>)
         </a>
         <a
-          href=""
-          th:href="@{/user/logout}"
+          href="javascript:void(0)"
           sec:authorize="isAuthenticated()"
-          >로그아웃</a
         >
+          <form
+            th:action="@{/user/logout}"
+            method="POST"
+            onclick="this.submit()"
+          >
+            로그아웃
+          </form>
+        </a>
       </div>
     </header>
     <nav class="main">

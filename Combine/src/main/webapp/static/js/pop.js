@@ -2,8 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
   var nounList = document.getElementById("nounList");
   var modalWordsList = document.getElementById("modalWordsList");
   var currentUrl = window.location.href;
-  console.log("현재 화면의 URL:", currentUrl);
+
   var selectedNoun = ""; // 선택한 명사를 저장할 변수
+
+  const textArea = document.querySelector("textarea");
+
+  const btn = document.querySelector("button.delete");
+
+  btn.addEventListener("click", () => {
+    textArea.value = ""; // 텍스트 에어리어 내용 지우기
+  });
 
   // 텍스트 에어리어 더블클릭 이벤트 핸들러
   document
@@ -119,5 +127,48 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("displayText").textContent;
         inputText.value = resultText;
       }
+      submitForm();
     });
+
+  function replaceNounsInTextarea() {
+    var textarea = document.getElementById("inputText");
+    var selectedNoun =
+      document.getElementById("selectedNoun").textContent;
+    var replaceWord =
+      document.getElementById("replaceWord").textContent;
+
+    if (textarea && selectedNoun && replaceWord) {
+      var text = textarea.value;
+      var nounIndices = []; // 선택된 명사의 위치를 저장할 배열
+
+      // 텍스트 에어리어에서 선택된 명사가 나타나는 위치 찾기
+      var index = text.indexOf(selectedNoun);
+      while (index !== -1) {
+        nounIndices.push(index);
+        index = text.indexOf(selectedNoun, index + 1);
+      }
+
+      // 명사 리스트에서 선택된 명사의 위치와 일치하는 위치에 대체어 삽입
+      for (var i = 0; i < nounIndices.length; i++) {
+        var currentIndex = nounIndices[i];
+        text =
+          text.slice(0, currentIndex) +
+          replaceWord +
+          text.slice(currentIndex + selectedNoun.length);
+
+        // 대체어를 삽입했으므로 나머지 위치들을 조정
+        for (var j = i + 1; j < nounIndices.length; j++) {
+          nounIndices[j] += replaceWord.length - selectedNoun.length;
+        }
+      }
+
+      // 수정된 텍스트를 텍스트 에어리어에 할당
+      textarea.value = text;
+      submitForm();
+    } else {
+      console.error(
+        "텍스트 에어리어나 선택된 명사, 대체어를 찾을 수 없습니다."
+      );
+    }
+  }
 });
