@@ -103,21 +103,33 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("myForm").submit();
   }
 
-  // 선택한 명사를 클릭한 단어로 대체하는 함수
   function replaceSelectedNoun(replaceWord) {
     var textarea = document.getElementById("inputText");
     if (textarea) {
-      var replacedText = textarea.value.replace(
-        selectedNoun,
-        replaceWord
+      var replacedText = textarea.value;
+
+      // 모든 선택한 단어를 한꺼번에 대체하려면 replace() 함수 대신에 정규식을 사용하여 모든 일치하는 단어를 한 번에 대체합니다.
+      // replacedText = replacedText.replace(new RegExp(selectedNoun, "g"), replaceWord);
+
+      // 선택한 단어가 여러 번 등장할 경우를 고려하여 해당 명사의 등장 횟수를 세는 코드 추가
+      var count = 0; // 선택한 단어가 등장한 횟수를 저장할 변수
+
+      // 텍스트에 등장한 선택한 단어의 위치를 찾아서 대체
+      replacedText = replacedText.replace(
+        new RegExp(selectedNoun, "g"),
+        function (match, offset) {
+          // offset은 일치하는 부분의 시작 위치를 나타냅니다.
+          count++; // 등장 횟수 증가
+          return count === 1 ? replaceWord : match; // 첫 번째 등장한 경우에만 대체하고, 그 외에는 기존 단어를 유지합니다.
+        }
       );
-      textarea.value = replacedText;
-      submitForm();
+
+      textarea.value = replacedText; // 텍스트 에어리어에 변경된 텍스트 적용
+      submitForm(); // 폼 제출 함수 호출
     } else {
       console.error("텍스트 에어리어를 찾을 수 없습니다.");
     }
   }
-
   // 맞춤법 검사 결과 클릭 시 텍스트 에어리어에 반영
   document
     .getElementById("displayText")
@@ -129,46 +141,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       submitForm();
     });
-
-  function replaceNounsInTextarea() {
-    var textarea = document.getElementById("inputText");
-    var selectedNoun =
-      document.getElementById("selectedNoun").textContent;
-    var replaceWord =
-      document.getElementById("replaceWord").textContent;
-
-    if (textarea && selectedNoun && replaceWord) {
-      var text = textarea.value;
-      var nounIndices = []; // 선택된 명사의 위치를 저장할 배열
-
-      // 텍스트 에어리어에서 선택된 명사가 나타나는 위치 찾기
-      var index = text.indexOf(selectedNoun);
-      while (index !== -1) {
-        nounIndices.push(index);
-        index = text.indexOf(selectedNoun, index + 1);
-      }
-
-      // 명사 리스트에서 선택된 명사의 위치와 일치하는 위치에 대체어 삽입
-      for (var i = 0; i < nounIndices.length; i++) {
-        var currentIndex = nounIndices[i];
-        text =
-          text.slice(0, currentIndex) +
-          replaceWord +
-          text.slice(currentIndex + selectedNoun.length);
-
-        // 대체어를 삽입했으므로 나머지 위치들을 조정
-        for (var j = i + 1; j < nounIndices.length; j++) {
-          nounIndices[j] += replaceWord.length - selectedNoun.length;
-        }
-      }
-
-      // 수정된 텍스트를 텍스트 에어리어에 할당
-      textarea.value = text;
-      submitForm();
-    } else {
-      console.error(
-        "텍스트 에어리어나 선택된 명사, 대체어를 찾을 수 없습니다."
-      );
-    }
-  }
 });
